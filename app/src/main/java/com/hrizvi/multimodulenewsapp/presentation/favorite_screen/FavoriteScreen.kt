@@ -74,7 +74,6 @@ fun FavoriteScreen(
     }
 }
 
-// Add this new composable function for the animated empty state
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AnimatedEmptyFavoriteState(
@@ -96,7 +95,6 @@ private fun AnimatedEmptyFavoriteState(
         modifier = modifier
     ) {
         Column(
-//            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
         ) {
             Text(
