@@ -37,7 +37,6 @@ fun NewsListScreen(
     val lazyListState = rememberLazyListState()
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing = false)
 
-    // Animation states
     val searchBarAlpha by animateFloatAsState(
         targetValue = if (state.isLoading && state.newsArticles.isEmpty()) 0.5f else 1f,
         animationSpec = tween(300),
@@ -54,7 +53,6 @@ fun NewsListScreen(
                     )
                 },
                 actions = {
-                    // Refresh button with rotation animation
                     var isRefreshing by remember { mutableStateOf(false) }
                     val rotationAngle by animateFloatAsState(
                         targetValue = if (isRefreshing) 360f else 0f,
@@ -66,7 +64,6 @@ fun NewsListScreen(
                         label = "rotation"
                     )
 
-                    // Animated favorite button
                     IconButton(
                         onClick = {
                             navController.navigate(Screen.FavoriteScreen.route)
@@ -92,7 +89,6 @@ fun NewsListScreen(
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                // Animated Search Bar
                 AnimatedVisibility(
                     visible = true,
                     enter = slideInVertically(
@@ -112,13 +108,11 @@ fun NewsListScreen(
                     )
                 }
 
-                // Content with animations
                 Box(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     when {
                         state.isLoading && state.newsArticles.isEmpty() -> {
-                            // Shimmer loading effect
                             LazyColumn(
                                 verticalArrangement = Arrangement.spacedBy(8.dp),
                                 contentPadding = PaddingValues(8.dp)
@@ -157,7 +151,7 @@ fun NewsListScreen(
                             ) {
                                 items(
                                     items = state.filteredArticles,
-                                    key = { article -> article.url } // Fix duplicate issue
+                                    key = { article -> article.url } 
                                 ) { article ->
                                     this@Column.AnimatedVisibility(
                                         visible = true,
