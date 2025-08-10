@@ -18,7 +18,6 @@ class NewsRepositoryImpl @Inject constructor(
 ) : NewsRepository {
 
     override fun getNewsHeadlines(country: String): Flow<List<NewsArticle>> {
-        // This function simply returns the cached data as a Flow.
         return newsDao.getNewsArticles().map { entities ->
             entities.map { it.toNewsArticle() }
         }
@@ -26,7 +25,6 @@ class NewsRepositoryImpl @Inject constructor(
 
     override suspend fun refreshNewsHeadlines(country: String) {
         try {
-            // Now, we are correctly using the BuildConfig field for the API key.
             val response = newsApiService.getNewsHeadlines(country, API_KEY)
             val newsEntities = response.articles.map { it.toNewsArticleEntity() }
             newsDao.insertAll(newsEntities)
