@@ -2,7 +2,6 @@ package com.hrizvi.multimodulenewsapp.data.remote.dto
 
 import com.hrizvi.multimodulenewsapp.data.local.NewsArticleEntity
 
-// Converts a DTO from the API to a database entity
 fun ArticleDto.toNewsArticleEntity(): NewsArticleEntity {
     return NewsArticleEntity(
         title = this.title,
