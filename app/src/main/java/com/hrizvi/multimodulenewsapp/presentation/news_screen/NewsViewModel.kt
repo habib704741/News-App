@@ -56,7 +56,6 @@ class NewsViewModel @Inject constructor(
                 )
             }
             .onEach { articles ->
-                // Remove duplicates based on URL and title
                 val uniqueArticles = removeDuplicates(articles)
                 allArticles = uniqueArticles
 
@@ -77,7 +76,7 @@ class NewsViewModel @Inject constructor(
 
     private fun setupSearch() {
         _searchQuery
-            .debounce(300) // Wait 300ms after user stops typing
+            .debounce(300) 
             .distinctUntilChanged()
             .onEach { query ->
                 performSearch(query)
@@ -100,9 +99,7 @@ class NewsViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) {
-        // Update state immediately for UI responsiveness
         _state.value = _state.value.copy(searchQuery = query)
-        // Also update the search flow for debounced search
         _searchQuery.value = query
     }
 
@@ -119,7 +116,6 @@ class NewsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 newsRepository.toggleFavoriteStatus(article)
-                // Optimistically update the UI
                 updateArticleInState(article.copy(isFavorite = !article.isFavorite))
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
