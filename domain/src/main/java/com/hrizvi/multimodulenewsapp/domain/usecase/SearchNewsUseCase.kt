@@ -15,7 +15,6 @@ class SearchNewsUseCase {
                 article.sourceName?.lowercase()?.contains(term) == true
             }
         }.sortedByDescending { article ->
-            // Sort by relevance - articles with query in title get higher priority
             when {
                 article.title.lowercase().contains(query.lowercase()) -> 3
                 article.description?.lowercase()?.contains(query.lowercase()) == true -> 2
